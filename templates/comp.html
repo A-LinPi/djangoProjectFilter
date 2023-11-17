@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COMP</title>
+</head>
+<body>
+    <h2>Компания продукт</h2>
+    {% if database %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>FIRMA</th>
+            <th>NANE</th>
+            <th>COST</th>
+        </tr>
+        {% for one in database %}
+        <tr>
+            <td>{{ one.id }}</td>
+            <td>{{ one.firma.title }}</td>
+            <td>{{ one.name }}</td>
+            <td>{{ one.cost }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ forma }}
+        <input type="submit" value="Poisk">
+    </form>
+</body>
+</html>
