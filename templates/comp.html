@@ -6,6 +6,11 @@
 </head>
 <body>
     <h2>Компания продукт</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ forma }}
+        <input type="submit" value="Poisk">
+    </form>
     {% if database %}
     <table>
         <tr>
@@ -24,10 +29,6 @@
         {% endfor %}
     </table>
     {% endif %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ forma }}
-        <input type="submit" value="Poisk">
-    </form>
+
 </body>
 </html>

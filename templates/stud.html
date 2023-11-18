@@ -9,9 +9,9 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ forma }}
-        <input type="submit" value="Poisk">
+        <input type="submit" value="Поиск">
     </form>
-    {% if 'S' in key %}
+    {% if 'C' in key %}
     <table>
         <tr>
             <th>ID</th>
@@ -27,7 +27,23 @@
         {% endfor %}
     </table>
     {% endif %}
-    {% if 'C' in key %}
+    {% if 'S' in key %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>GROUP</th>
+        </tr>
+        {% for one in database %}
+        <tr>
+            <td>{{ one.id }}</td>
+            <td>{{ one.name }}</td>
+            <td>{{ one.group }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% if 'N' in key %}
     <table>
         <tr>
             <th>ID</th>

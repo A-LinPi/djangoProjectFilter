@@ -35,4 +35,4 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'group', 'kursDisplay')
+    list_display = ('name', 'group', 'courses_display')

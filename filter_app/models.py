@@ -1,9 +1,11 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 # Create your models here.
 class Car(models.Model):
-    VIBOR = (('white', 'white'), ('black', 'black'), ('red', 'red'), ('blue', 'blue'))
+    VIBOR = (('white', 'white'), ('black', 'black'), ('red', 'red'), ('blue', 'blue'), ('violet', 'violet'),
+             ('pink', 'pink'), ('yellow', 'yellow'))
     brand = models.CharField(max_length=20, verbose_name='марка', blank=True)
     cost = models.IntegerField(verbose_name='цена', blank=True)
     year = models.IntegerField(verbose_name='год выпуска', blank=True)
@@ -36,12 +38,14 @@ class Course(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=20)
-    group = models.CharField(max_length=4)
-    kurs = models.ManyToManyField(Course)
+    group = models.CharField(max_length=6)
+    courses = models.ManyToManyField(Course)
+    receives_scholarship = models.BooleanField(default=False)
+    GPA = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], default=1.0)
 
-    def kursDisplay(self):
+    def courses_display(self):
         res = ''
-        for one in self.kurs.all():
+        for one in self.courses.all():
             res += ' ' + one.title
         return res
 

@@ -61,12 +61,21 @@ def stud(request):
     if request.POST:
         a = request.POST.get('poleCourse')
         b = request.POST.get('poleStud')
+        c = request.POST.get('poleGPA')
+        d = request.POST.get('poleStudHaveScholarship')
 
-        if b and not a:
-            db = Student.objects.get(id=b).kurs.all()
-            param = 'S'
-        elif a and not b:
-            db = Course.objects.get(id=a).student_set.all()
+        if b and not a and not c and not d:
+            db = Student.objects.get(id=b).courses.all()
             param = 'C'
+        elif a and not b and not c and not d:
+            db = Course.objects.get(id=a).student_set.all()
+            param = 'S'
+        elif c and not b and not a and not d:
+            db = Student.objects.filter(GPA__gte=c)
+            param = 'S'
+        elif d and not b and not a and not c:
+            db = Student.objects.filter(receives_scholarship=1)
+            param = 'S'
+
     data = {'database': db, 'forma': forma, 'key': param}
     return render(request, 'stud.html', data)
