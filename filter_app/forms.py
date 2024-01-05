@@ -9,7 +9,9 @@ class CarForm(forms.ModelForm):
 
 
 class CompanyForm(forms.Form):
-    pole = forms.ModelChoiceField(Company.objects.all())
+    pole_comp = forms.ModelChoiceField(Company.objects.all(), required=False, label='Поиск по фирмам')
+    pole_juice = forms.ModelChoiceField(queryset=Product.objects.all(), required=False, label='Поиск по названию')
+    pole_price = forms.FloatField(label='Цена меньше', required=False)
 
 
 class StudentForm(forms.Form):

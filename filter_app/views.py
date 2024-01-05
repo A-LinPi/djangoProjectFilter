@@ -48,8 +48,17 @@ def comp(request):
     forma = CompanyForm()
     if request.POST:
         K1 = request.POST.get('pole')
-        print(K1)
-        db = Company.objects.get(id=K1).product_set.all()
+        K2 = request.POST.get('pole_juice')
+        K3 = request.POST.get('pole_price')
+        if K1 and not K2 and not K3:
+            db = Company.objects.get(id=K1).product_set.all()
+        elif K2 and not K1 and not K3:
+            print(K2)
+            juice_name = Product.objects.get(id=K2)
+            db = Product.objects.filter(name=juice_name)
+        elif K3 and not K1 and not K2:
+            db = Product.objects.filter(cost__lte=K3)
+
     data = {'database': db, 'forma': forma}
     return render(request, 'comp.html', data)
 
